@@ -1,0 +1,177 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <style>
+    .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48;
+    }
+    </style>
+    <title>THE BANG THEORY</title>
+</head>
+<body>
+
+    <nav class="bg-white h-[15rem] flex justify-around items-center rounded-2xl max-w-full ">
+        <div>
+             <img src="{%static 'images/logo.png'%}" class="w-[10rem]" >
+        </div>
+        <div class="flex gap-20 pr-7">
+            <a href="#main" class="font-mono no-underline text-black">HOME</a>
+            <a href="#about" class="font-mono no-underline text-black">ABOUT</a>
+            <a href="#hairstyles" class="font-mono no-underline text-black">HAIRCUTS</a>
+            <a href="#products" class="font-mono no-underline text-black">PRODUCTS</a>
+            <a href="{% url 'cart' %}" class="font-mono no-underline text-black">CART</a>
+            <a href="{% url 'signup' %}" class="font-mono no-underline text-black">SIGNUP</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}"  class="font-mono no-underline text-black">LOGOUT</a>
+            {% else %}
+                <a href="{% url 'login' %}"  class="font-mono no-underline text-black">LOGIN</a>
+            {% endif %}
+
+            
+        </div>
+    </nav>
+    <div id="main" class="bg-black text-white flex justify-center items-center min-h-screen relative">
+        <div id="brand" class="relative text-center min-h-screen w-[600px] h-[400px] flex justify-center items-center ">
+            <h1 class="left absolute font-mono text-white text-3xl">THE BANG THEORY<br><p class="font-timesNewRoman text-xs">Get your Celeb looks now</p></h1>
+            <h1 class="left absolute font-mono text-white text-3xl opacity-0">July Summer Sale<br><p class="font-timesNewRoman text-xs">Discounts on premium products upto 50%</p></h1>
+            <h1 class="left absolute font-mono text-white text-3xl opacity-0 text-sm">Get the pinteresty looks at the best price</h1>
+        </div>
+        <div id="photos" class="relative text-center min-h-screen w-[600px] h-[400px] flex justify-center items-center">
+            <img src="{% static 'images/hair4.png' %}" class="right absolute w-[25rem] h-[25rem]">
+            <img src="{% static 'images/hair5.png' %}" class="right absolute w-[25rem] h-[25rem] opacity-0">
+            <img src="{% static 'images/hair3.png' %}" class="right absolute w-[25rem] h-[25rem] opacity-0">
+        </div>
+    </div>
+    <div id="aesthetic" class="bg-[url('{% static 'images/inspo.png' %}')] bg-center h-[30rem] relative ">
+        <h1 class="text-white font-['Bungee'] text-[5rem] pt-[9rem]">GOOD HAIR</h1>
+        <h1 class="text-white font-['Bungee'] text-[5rem]">DAY</h1>
+    </div>
+    <section id="hairstyles">
+        <h1 class=" font-mono text-black text-3xl text-center mt-[4rem]">CELEB INSPIRED LOOKS</h1>
+        <p  class=" font-mono text-black text-center">Your go to Hair dresser</p>
+        <div class="columns-1 sm:columns-2 md:columns-3 gap-4 p-4 max-w-screen-xl mx-auto">
+              <img src="{% static 'images/cut1.png' %}" class="mb-4 transform hover:scale-105 transition duration-300 rounded-2xl w-full h-[30rem] object-cover" />
+              <img src="{% static 'images/cut2.png' %}" class="mb-4 transform hover:scale-105 transition duration-300 rounded-2xl w-full h-[15rem] object-cover" />
+              <img src="{% static 'images/cut3.png' %}" class="mb-4 transform hover:scale-105 transition duration-300 rounded-2xl w-full h-[15rem] object-cover" />
+              <img src="{% static 'images/cut4.png' %}" class="mb-4 transform hover:scale-105 transition duration-300 rounded-2xl w-full h-[30rem] object-cover" />
+              <img src="{% static 'images/cut5.png' %}" class="mb-4 transform hover:scale-105 transition duration-300 rounded-2xl w-full h-[30rem] object-cover" />
+              <img src="{% static 'images/cut6.png' %}" class="mb-4 transform hover:scale-105 transition duration-300 rounded-2xl w-full h-[15rem] object-cover" />
+      
+        </div>
+    </section>
+{% block content %}
+<section id="products" class="p-8 bg-white max-w-full max-h-screen mb-[2rem]">
+    <h1 class="text-black text-2xl font-bold mb-4">Products</h1>
+    <div class="flex overflow-x-auto gap-4 p-4 bg-black rounded-2xl text-center m-2 scrollbar-hide">
+        {% for item in items %}
+            <div class="bg-white p-4 rounded-xl min-w-[270px] flex-shrink-0">
+                <img src="{{ item.image.url }}" class="w-full h-40 object-cover rounded-2xl">
+                <h2 class="text-xl">{{ item.name }}</h2>
+                <p>{{ item.price }} ₹</p>
+                <p>{{ item.description }}</p>
+                
+                <div class="icons flex justify-around mt-2">
+                    <button class="material-symbols-outlined favorite-btn text-black transition-colors duration-300">favorite</button>
+                    <a href="{% url 'add_to_cart' item.id %}" class="material-symbols-outlined">shopping_bag</a>
+                </div>
+                
+            </div>
+        {% endfor %}
+
+    </div>
+</section>
+{% endblock %}
+
+    <div class="book flex justify-center items-center p-8 mt-[1rem]">
+        <div id="booknow" class="w-[25rem] h-auto p-8 bg-black rounded-2xl">
+        <form class="flex flex-col gap-[1rem] text-white">
+            <label for="name">Name:</label>
+            <input type="text" class="h-[3rem] text-black text-center rounded-2xl" name="Name" required placeholder="Enter your full name">
+            <label for="mail">Email:</label>
+            <input type="email" class="h-[3rem] text-black text-center rounded-2xl" name="mail" placeholder="Enter your mail id">
+            <label for="service">Services:</label>
+            <select id="service" class="h-[3rem] rounded-2xl text-center text-black" class="service">
+                <option value="Haircut" class="h-[3rem] text-black rounded-2xl">Haircut</option>
+                <option value="Styling" class="h-[3rem] text-black rounded-2xl">Styling</option>
+                <option value="Hairspa" class="h-[3rem] text-black rounded-2xl">Hairspa</option>
+            </select>
+            <label for="no">Number:</label>
+            <input type="tel" class="h-[3rem] text-black text-center rounded-2xl" name="no" placeholder="Enter Contact">
+            <label for="dob">Appointment Date:</label>
+            <input type="date" class="h-[3rem] text-black text-center rounded-2xl" id="dob" name="dob">
+
+            <button class="bg-white text-black h-[3rem] rounded-2xl m-2 transform hover:bg-black hover:text-white transition duration-300">Book Now</button>
+        </form>
+    </div>
+
+    </div>
+
+
+    <footer id="about" class="min-w-screen max-w-full h-[25rem] bg-white">
+        <div>
+            <h1 class="text-black font-mono p-4">ABOUT</h1>
+            <p class="text-black font-mono text-xs p-4">At The Bang Theory, we believe every woman deserves to feel confident and beautiful. Our expert stylists specialize in personalized hair care,cutting-edge styles, and treatments tailored to your unique look.We also offer a curated range of premium hair products to keep your hair healthy and radiant—inside the salon and at home.</p>
+        </div>
+        <div id="links" class="flex mt-[3rem] justify-between gap-10 p-4 mr-[10rem]">
+            <div>
+                <img src="{%static 'images/logo.png'%}"class="w-44 mr-[20rem]" >
+            </div>
+            <div class="flex gap-7">
+                <div class="sellers text-black font-mono flex flex-col gap-2">
+                    <a href="#products" class="hover:text-gray-300 ">Best Sellers</a>
+                    <a href="#hairstyles" class="hover:text-gray-300 ">Pinterest Looks</a>
+                    <a href="#home" class="hover:text-gray-300 ">Celeb Looks</a>
+                    <a href="#" class="hover:text-gray-300 ">Our Professionals</a>
+                    <a href="#" class="hover:text-gray-300 ">Reviews</a>
+                </div>
+
+                <div class="socials text-black font-mono flex flex-col gap-2">
+                    <a href="#" class="hover:text-gray-300 ">Contact Us</a>
+                    <a href="#" class="hover:text-gray-300 ">Instagram</a>
+                    <a href="#" class="hover:text-gray-300 ">Pinterest</a>
+                    <a href="#" class="hover:text-gray-300 ">Tiktok</a>
+                    <a href="#" class="hover:text-gray-300 ">Facebook</a>
+                    <a href="#" class="hover:text-gray-300 ">Twitter</a>
+                 </div>
+
+            </div>
+            
+        </div>
+
+        
+
+    </footer>
+<script src="{% static 'javascript/script.js' %}"></script>
+<script>
+    document.querySelectorAll('.favorite-btn').forEach(button => {
+      button.addEventListener('click', function () {
+        this.classList.toggle('text-red-600');
+        this.classList.toggle('text-gray-500');
+        
+      });
+    });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+           

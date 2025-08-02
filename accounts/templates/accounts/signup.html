@@ -1,0 +1,48 @@
+<!-- signup.html -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <title>Sign Up</title>
+</head>
+<body class="flex justify-center items-center bg-cover" style="background-image:url('{% static "images/wall2.png" %}')">
+
+    <div class="w-72 h-auto mt-12 p-8 bg-black rounded-2xl flex flex-col items-center">
+    <h2 class="text-white bg-grey-500 hover:bg-grey-600 font-bold py-2 px-4 rounded text-lg mb-6 w-68">Sign Up</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="mb-4 w-68 px-3 py-2 mt-1 border border-gray-300 rounded bg-white text-black">
+        {{ form.username.label_tag }}
+        {{ form.username}}
+        </div>
+
+        <div class="mb-4 w-68 px-3 py-2 mt-1 border border-gray-300 rounded bg-white text-black">
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        </div>
+
+        <div class="mb-4 w-68 px-3 py-2 mt-1 border border-gray-300 rounded bg-white text-black">
+        {{ form.password1.label_tag }}
+        {{ form.password1 }}
+        </div>
+
+        <div class="mb-4 w-68 px-3 py-2 mt-1 border border-gray-300 rounded bg-white text-black">
+        {{ form.password2.label_tag }}
+        {{ form.password2 }}
+        </div>
+
+        <button type="submit" class="w-44 py-2 px-3 mb-4 mt-1 ml-4 bg-gray-200 hover:bg-black hover:text-white text-black font-semibold rounded">
+        REGISTER
+        </button>
+    </form>
+    </div>
+
+
+    
+</body>
+</html>

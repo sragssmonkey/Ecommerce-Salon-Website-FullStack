@@ -1,0 +1,36 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Your Cart</title>
+</head>
+<body class="bg-cover flex items-center justify-center" style="background-image:url('{% static "images/design.jpeg" %}')"">
+    
+    {% block content %}
+    <div class="max-w-2xl mx-auto p-6  mt-24  shadow-md rounded-lg">
+        <h1 class="text-2xl font-bold mb-4">Your Cart</h1>
+        {% for item in cart_items %}
+            <div class="flex justify-between items-center mb-4 border-b pb-2">
+                <div>
+                    <p class="text-lg font-semibold">{{ item.thing.name }}</p>
+                    <p class="text-sm text-gray-600">Qty: {{ item.quantity }}</p>
+                    <p class="text-sm">₹{{ item.thing.price }} each</p>
+                </div>
+                <a href="{% url 'remove_from_cart' item.id %}" class="text-red-500 hover:text-red-700 font-semibold">Remove</a>
+            </div>
+        {% empty %}
+            <p class="text-gray-600">Your cart is empty.</p>
+        {% endfor %}
+        <div class="text-right mt-6 text-lg font-bold">
+            Total: ₹{{ total }}
+        </div>
+    </div>
+    {% endblock %}
+
+
+</body>
+</html>
+
