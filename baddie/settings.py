@@ -138,7 +138,8 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'             # for collectstatic (producti
 
 # Media files (uploads)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = '/opt/render/media'
+
 
 
 
