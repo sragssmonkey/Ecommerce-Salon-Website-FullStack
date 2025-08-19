@@ -129,7 +129,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 DEBUG = True
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost","ecommerce-salon-website-fullstack.onrender.com","ecommerce-salon-website-fullstack-1.onrender.com"]
 
 # Static files (CSS, JS, images)
 STATIC_URL = '/static/'
