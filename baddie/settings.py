@@ -23,10 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 import os
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret-key')
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = True
 ALLOWED_HOSTS = [
     'ecommerce-salon-website-fullstack.onrender.com',
     'ecommerce-salon-website-fullstack-1.onrender.com',
+    "127.0.0.1", "localhost",
 ]
 
 
@@ -122,14 +123,25 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 import os
+from pathlib import Path
+import os
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+DEBUG = True
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+
+# Static files (CSS, JS, images)
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'core' / 'static']  # source static folder
+STATIC_ROOT = BASE_DIR / 'staticfiles'             # for collectstatic (production)
+
+# Media files (uploads)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
